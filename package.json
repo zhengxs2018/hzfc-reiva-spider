@@ -4,11 +4,14 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
+    "start": "node -r dotenv/config ./dist/main.js",
     "dev": "tsnd -r dotenv/config ./src/main.ts",
     "debug": "tsnd --inspect -r dotenv/config ./src/main.ts",
     "build": "tsc",
     "lint": "prettier . -cw",
-    "format": "prettier . -w"
+    "format": "prettier . -w",
+    "docker:build": "docker build --no-cache -t hzfc_reiva_spider .",
+    "docker:run": "docker run -d --name hzfc_reiva_spider -p 9000:9000 hzfc_reiva_spider"
   },
   "husky": {
     "hooks": {

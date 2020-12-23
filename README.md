@@ -96,7 +96,6 @@ $ npm run debug
 
 为防止流量太大，请手动打开视频: [查看视频](./screenshots/chrome-devtools-debug.mp4)
 
-
 **在 VSCode 上**
 
 <img src="./screenshots/vscode-debug.png" width="360px" />
