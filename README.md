@@ -45,7 +45,7 @@
 
 ## 数据清洗
 
-数据校验采用 [class-validator][class-validator] 模块进行数据转换和过滤。
+数据采用 [class-validator][class-validator] 模块进行数据转换和过滤。
 
 清理后的数据通过人工二次校验后，再导入生产数据库。
 
@@ -92,16 +92,13 @@ $ npm run debug
 
 **在 Chrome devtools 上**
 
-<img src="./screenshots/chrome-devtools-01.png" height="360px" />
-
-<video width="640" height="360" controls="controls">
-  <source src="./screenshots/chrome-devtools-debug.mp4" type="video/mp4" />
-</video>
+<img src="./screenshots/chrome-devtools-01.png" width="360px" />
+<img src="./screenshots/chrome-devtools-debug.gif"  />
 
 **在 VSCode 上**
 
-<img src="./screenshots/vscode-debug.png" height="360px" />
-<img src="./screenshots/vscode-debug-1.png" height="360px" />
+<img src="./screenshots/vscode-debug.png" width="360px" />
+<img src="./screenshots/vscode-debug-1.png" />
 
 ## 待办事件
 
