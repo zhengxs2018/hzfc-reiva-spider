@@ -1,0 +1,12 @@
+node_modules/
+backup*
+
+yarn.lock
+
+# 缓存目录
+.workspace
+.history
+
+.env
+.DS_Store
+

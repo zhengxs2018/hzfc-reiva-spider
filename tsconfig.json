@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* Basic Options */
+    "module": "commonjs",
+    "target": "es2017",
+    "declaration": false,
+    "sourceMap": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "strictBindCallApply": true,
+
+    /* Additional Checks */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */,
+
+    /* Advanced Options */
+    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_module"]
+}

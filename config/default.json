@@ -1,0 +1,18 @@
+{
+  "tasks": {
+    "company": {
+      "description": "中介公司爬虫"
+    },
+    "broker": {
+      "description": "经纪人爬虫"
+    }
+  },
+  "scheduler": {
+    "company": {
+      "cron": "0 1 * * * *"
+    },
+    "broker": {
+      "cron": "0 1 * * * *"
+    }
+  }
+}
