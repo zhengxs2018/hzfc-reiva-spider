@@ -73,12 +73,14 @@ export class CompanySpider extends Spider {
   })
   @AddToQueue([
     { name: 'company.list.queue' },
-    { name: 'company.info.queue', filterType: HistoryFilter }
+    { name: 'company.info.queue', filterType: HistoryFilter },
   ])
   async start(job: Job) {
-    const $ = await this.parse(await this.request({
-      url: job.url
-    }))
+    const $ = await this.parse(
+      await this.request({
+        url: job.url,
+      })
+    )
 
     const { items, pageCount } = this.processList($)
     if (items.length === 0) return {}
@@ -102,7 +104,7 @@ export class CompanySpider extends Spider {
 
     return {
       'company.list.queue': tasks,
-      'company.info.queue': this.toTasks(items)
+      'company.info.queue': this.toTasks(items),
     }
   }
 

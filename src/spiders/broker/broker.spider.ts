@@ -66,7 +66,7 @@ export class BrokerSpider extends Spider {
   })
   @AddToQueue([
     { name: 'broker.list.queue' },
-    { name: 'broker.info.queue', filterType: HistoryFilter }
+    { name: 'broker.info.queue', filterType: HistoryFilter },
   ])
   async start(job: Job) {
     const $ = await this.parse(await this.request({ url: job.url }))
@@ -93,7 +93,7 @@ export class BrokerSpider extends Spider {
 
     return {
       'broker.list.queue': tasks,
-      'broker.info.queue': this.toTasks(items)
+      'broker.info.queue': this.toTasks(items),
     }
   }
 

@@ -45,7 +45,12 @@ export class AppModule {
   @AddToQueue({ name: 'broker.info.queue', filterType: HistoryFilter })
   async addBrokerJob(req: Request, res: Response) {
     const { code, orgCode } = req.query
-    if (isString(code) && isNotEmpty(code) && isString(orgCode) && isNotEmpty(orgCode)) {
+    if (
+      isString(code) &&
+      isNotEmpty(code) &&
+      isString(orgCode) &&
+      isNotEmpty(orgCode)
+    ) {
       const url = new URL(BROKER_INFO_URI)
       url.searchParams.set('cyrybh', code)
       url.searchParams.set('qycode', orgCode)
