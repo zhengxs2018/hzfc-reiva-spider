@@ -93,7 +93,9 @@ $ npm run debug
 **在 Chrome devtools 上**
 
 <img src="./screenshots/chrome-devtools-01.png" width="360px" />
-<img src="./screenshots/chrome-devtools-debug.gif"  />
+
+为防止流量太大，请手动打开视频: [查看视频](./screenshots/chrome-devtools-debug.mp4)
+
 
 **在 VSCode 上**
 
