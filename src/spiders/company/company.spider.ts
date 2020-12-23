@@ -71,12 +71,17 @@ export class CompanySpider extends Spider {
     ...config.get<OnTimeConfig>('scheduler.company'),
     urls: [COMPANY_LIST_URI],
   })
-  @AddToQueue({ name: 'company.list.queue' })
+  @AddToQueue([
+    { name: 'company.list.queue' },
+    { name: 'company.info.queue', filterType: HistoryFilter }
+  ])
   async start(job: Job) {
-    const $ = await this.parse(await this.request({ url: job.url }))
+    const $ = await this.parse(await this.request({
+      url: job.url
+    }))
 
     const { items, pageCount } = this.processList($)
-    if (items.length === 0) return []
+    if (items.length === 0) return {}
 
     // 简单判断下是否存在新数据
     if (job.datas.force !== true) {
@@ -90,12 +95,15 @@ export class CompanySpider extends Spider {
     const searchParams = url.searchParams
     const tasks: Task[] = []
 
-    for (let i = 0; i < pageCount; i++) {
+    for (let i = 1; i < pageCount; i++) {
       searchParams.set('page', (i + 1).toString())
-      tasks.push({ name: 'company.list.queue', url: url.toString() })
+      tasks.push({ url: url.toString() })
     }
 
-    return tasks
+    return {
+      'company.list.queue': tasks,
+      'company.info.queue': this.toTasks(items)
+    }
   }
 
   @FromQueue({ name: 'company.list.queue', parallel: 50, exeInterval: 800 })
@@ -185,7 +193,6 @@ export class CompanySpider extends Spider {
 
   toTasks(items: ItemData[]): Task[] {
     return items.map((item) => ({
-      name: 'company.info.queue',
       url: item.url,
       datas: { item },
     }))

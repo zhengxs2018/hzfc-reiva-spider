@@ -64,17 +64,18 @@ export class BrokerSpider extends Spider {
     ...config.get<OnTimeConfig>('scheduler.broker'),
     urls: [BROKER_LIST_URI],
   })
-  @AddToQueue({ name: 'broker.list.queue' })
+  @AddToQueue([
+    { name: 'broker.list.queue' },
+    { name: 'broker.info.queue', filterType: HistoryFilter }
+  ])
   async start(job: Job) {
     const $ = await this.parse(await this.request({ url: job.url }))
 
     const { items, pageCount } = this.processList($)
     if (items.length === 0) return []
 
-    if (job.datas.force === true) {
-      await HistoryFilter.clear()
-    } else {
-      // 简单判断下是否存在新数据
+    // 简单判断下是否存在新数据
+    if (job.datas.force !== true) {
       const firstItem = head(items) as ItemData
       if (await HistoryFilter.isExisted(firstItem.url)) {
         return []
@@ -85,12 +86,15 @@ export class BrokerSpider extends Spider {
     const searchParams = url.searchParams
     const tasks: Task[] = []
 
-    for (let i = 0; i < pageCount; i++) {
+    for (let i = 1; i < pageCount; i++) {
       searchParams.set('page', (i + 1).toString())
-      tasks.push({ name: 'broker.list.queue', url: url.toString() })
+      tasks.push({ url: url.toString() })
     }
 
-    return tasks
+    return {
+      'broker.list.queue': tasks,
+      'broker.info.queue': this.toTasks(items)
+    }
   }
 
   @FromQueue({ name: 'broker.list.queue', parallel: 50, exeInterval: 800 })
@@ -180,7 +184,6 @@ export class BrokerSpider extends Spider {
 
   toTasks(items: ItemData[]): Task[] {
     return items.map((item) => ({
-      name: 'broker.info.queue',
       url: item.url,
       datas: { item },
     }))
