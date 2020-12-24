@@ -7,6 +7,8 @@ import {
   AddToQueue,
 } from 'ppspider'
 
+import { toSafeInteger } from 'lodash'
+
 import { isString, isNotEmpty } from 'class-validator'
 import { Request, Response } from 'express'
 
@@ -39,6 +41,7 @@ if (isDev) {
   logger: {
     level: isDev ? 'debug' : 'info',
   },
+  webUiPort: normalizePort(process.env.PORT || '9000')
 })
 export class AppModule {
   @RequestMapping('/broker/addJob')
@@ -82,4 +85,9 @@ export class AppModule {
 
     res.json({ code: 400, message: 'ID is required' })
   }
+}
+
+function normalizePort(val: string): number | undefined {
+  const port = toSafeInteger(val)
+  return port === 0 ? undefined : port
 }

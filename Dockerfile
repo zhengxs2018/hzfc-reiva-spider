@@ -3,6 +3,7 @@ FROM node:12-slim as build
 
 WORKDIR /root
 
+# 编译时不需要 puppeteer
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 COPY src ./src
@@ -18,16 +19,16 @@ FROM node:12-slim as prod
 
 WORKDIR /app
 
+ENV HOST_NAME="docker"
 ENV NODE_ENV="production"
 
 COPY --from=build /root/dist ./dist
 COPY config ./config
 COPY package.json .
-COPY .env .
 
 RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN cnpm install --production
 
 CMD ["npm", "start"]
 
-EXPOSE 9000
+EXPOSE ${PORT}

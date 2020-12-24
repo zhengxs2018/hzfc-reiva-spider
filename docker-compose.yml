@@ -1,0 +1,24 @@
+version: '3'
+services:
+  web:
+    build: .
+    restart: always
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: "mongodb://mongo:27017/hzfc"
+      PORT: 9000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+    ports:
+      - '9000:9000'
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - '27018:27017'
+

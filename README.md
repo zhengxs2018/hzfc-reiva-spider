@@ -81,13 +81,33 @@ $ yarn build
 $ open http://localhost:9000/
 ```
 
+## 使用 docker 启动
+
+在 `docker-compose.yml` 里面已经添加了 `mongodb` 服务，如果希望使用外部数据库，可以需要手动修改。
+
+```bash
+# 构建
+$ docker-compose build
+
+# 启动并后台运行
+$ docker-compose up -d
+```
+
+在本机连接 **docker** 中的 `mongodb` 数据库，使用 `mongodb://localhost:27018/hzfc` 地址，注意端口号是: `27018`;
+
+<img src="./screenshots/mongodb-connection.png" width="360px" />
+<img src="./screenshots/mongodb-connected.png" />
+
 ## 如何调试
 
 执行以下命令后，可以使用任何支持 `node inspector` 协议的工具上调试
 
 ```bash
-# 启动调试模式
-$ npm run debug
+# 启动开发调试服务
+$ yarn debug
+
+# 启动生产调试服务
+$ yarn debug:prod
 ```
 
 **在 Chrome devtools 上**
@@ -103,9 +123,9 @@ $ npm run debug
 
 ## 待办事件
 
-- [ ] 当 mongodb 无法使用时，降级为 [nedb][nedb]
 - [ ] 添加代理池
-- [ ] 添加 docker 支持
+- [x] 添加 docker 支持
+- [ ] 当 mongodb 无法使用时，降级为 [nedb][nedb]
 
 ## 免责声明
 

@@ -5,13 +5,14 @@
   "description": "",
   "scripts": {
     "start": "node -r dotenv/config ./dist/main.js",
-    "dev": "tsnd -r dotenv/config ./src/main.ts",
-    "debug": "tsnd --inspect -r dotenv/config ./src/main.ts",
+    "dev": "cross-env NODE_ENV=development tsnd -r dotenv/config ./src/main.ts",
+    "debug": "cross-env NODE_ENV=development tsnd --inspect -r dotenv/config ./src/main.ts",
+    "debug:prod": "node --inspect -r dotenv/config ./dist/main.js",
     "build": "tsc",
     "lint": "prettier . -cw",
     "format": "prettier . -w",
-    "docker:build": "docker build --no-cache -t hzfc_reiva_spider .",
-    "docker:run": "docker run -d --name hzfc_reiva_spider -p 9000:9000 hzfc_reiva_spider"
+    "docker:build": "docker-compose build",
+    "docker:run": "docker-compose up -d"
   },
   "husky": {
     "hooks": {
@@ -46,6 +47,7 @@
     "@types/request": "^2.48.5",
     "@types/validator": "^13.1.1",
     "@types/xmldom": "^0.1.30",
+    "cross-env": "^7.0.3",
     "husky": "^4.3.6",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
