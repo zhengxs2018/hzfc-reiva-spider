@@ -3,6 +3,8 @@ import config from 'config'
 import { head, toSafeInteger } from 'lodash'
 
 import {
+  Transient,
+  Autowired,
   OnStart,
   OnStartConfig,
   OnTime,
@@ -33,7 +35,9 @@ export interface ItemData extends Partial<Broker> {
 }
 
 export class BrokerSpider extends Spider {
-  pipeline: BrokerPipeline = new BrokerPipeline()
+  @Transient()
+  @Autowired()
+  pipeline!: BrokerPipeline
 
   fields: Array<[string, keyof ItemData, SetValue]> = [
     ['姓名', 'name', setStringValue],

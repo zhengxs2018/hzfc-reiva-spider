@@ -2,6 +2,8 @@ import config from 'config'
 import { head, toSafeInteger } from 'lodash'
 
 import {
+  Transient,
+  Autowired,
   OnStart,
   OnStartConfig,
   OnTime,
@@ -34,7 +36,9 @@ export interface ItemData extends Partial<Company> {
 }
 
 export class CompanySpider extends Spider {
-  pipeline: CompanyPipeline = new CompanyPipeline()
+  @Transient()
+  @Autowired()
+  pipeline!: CompanyPipeline
 
   fields: Array<[string, keyof ItemData, SetValue]> = [
     ['机构名称', 'name', setStringValue],

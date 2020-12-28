@@ -1,10 +1,11 @@
-import { logger } from 'ppspider'
+import { Bean, logger } from 'ppspider'
 
 import { Pipeline } from '../../system/core/pipeline'
 
 import { BrokerItem } from './broker.item'
 import type { Broker } from './broker.interface'
 
+@Bean()
 export class BrokerPipeline extends Pipeline<Broker> {
   __name__ = 'broker'
 
