@@ -83,7 +83,7 @@ $ open http://localhost:9000/
 
 ## 使用 docker 启动
 
-在 `docker-compose.yml` 里面已经添加了 `mongodb` 服务，如果希望使用外部数据库，可以需要手动修改。
+在 `docker-compose.yml` 里面已经添加了 `mongodb` 服务，如果希望使用外部数据库，需要手动修改。
 
 ```bash
 # 构建
