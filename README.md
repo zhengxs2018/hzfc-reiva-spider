@@ -1,6 +1,6 @@
 # 杭州二手房交易监管服务平台 - 数据采集系统
 
-> 持续更新中～
+> 为了防止被滥用，暂时停止更新
 
 [![Typescript](https://img.shields.io/badge/lang-TypeScript-%230074c1.svg)](https://www.typescriptlang.org/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
